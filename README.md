@@ -1,2 +1,1 @@
-# compiler
-just another repository 
+design and construction of compilers
