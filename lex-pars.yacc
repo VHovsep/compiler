@@ -92,14 +92,39 @@ $$ = new assignment_stmt($1, $3);
 
  ;
 
-exp:    LPAREN exp RPAREN  {
+exp:    exp PLUS exp {
+	         $$ = new plus_node($1, $3); }
+
+	     |	exp TIMES exp {
+	         $$ = new times_node($1, $3); }
+	
+	     |	exp MINUS exp{
+	         $$ = new minus_node($1, $3); }
+
+	     |	exp DIVIDED exp{
+	         $$ = new divided_node($1, $3); }
+
+      | LPAREN exp RPAREN  {
           $$ = $2; }
 
-        |       NUMBER {
+      |       NUMBER {
           $$ = new number_node($1); }
 
-        |       ID {
+      |       ID {
           $$ = new id_node($1); }
+
+      |       ID SMALL ID {
+          $$ = new small_node($1, $3); }
+
+      |       ID GREAT ID {
+          $$ = new great_node($1, $3); }
+
+      |       ID LOGICAL_OR ID {
+          $$ = new logical_or_node($1, $3); }
+         
+      |       ID LOGICAL_AND ID {
+          $$ = new logical_and_node($1, $3); }
+
 
 ;
 
