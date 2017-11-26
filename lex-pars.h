@@ -13,6 +13,13 @@ class exp_node {
                 virtual float evaluate() = 0;
 };
 
+class operator_node : public exp_node {
+        public:
+                exp_node *left;
+                exp_node *right;
+                operator_node(exp_node *L,exp_node *R);
+};
+
 class number_node : public exp_node {
 
         public:
@@ -27,6 +34,82 @@ class id_node : public exp_node {
 
         public:
                 id_node(string value);
+                void print();
+                float evaluate();
+};
+
+class plus_node : public operator_node {
+	public:
+
+		plus_node(exp_node *L, exp_node *R);
+		void print();
+		float evaluate();
+};
+
+class times_node : public operator_node {
+	public:
+
+		times_node(exp_node *L, exp_node *R);
+		void print();
+		float evaluate();
+};
+
+class minus_node : public operator_node {
+	public:
+
+		minus_node(exp_node *L, exp_node *R);
+		void print();
+		float evaluate();
+};
+
+class divided_node : public operator_node {
+	public:
+		
+		divided_node(exp_node *L, exp_node *R);
+		void print();
+		float evaluate();
+};
+
+class small_node : public exp_node {
+        protected:
+                bool result;
+                string id_1;
+                string id_2;
+        public:
+                small_node(string left, string right); 
+                void print();
+                float evaluate();
+};
+
+class great_node : public exp_node {
+        protected:
+                bool result;
+                string id_1;
+                string id_2;
+        public:
+                great_node(string left,string right);
+                void print();
+                float evaluate();
+};
+
+class logical_or_node : public exp_node {
+        protected:
+                bool result;
+                string id_1;
+                string id_2;
+        public:
+                logical_or_node(string left, string right);
+                void print();
+                float evaluate();
+};
+
+class logical_and_node : public exp_node {
+        protected:
+                bool result;
+                string id_1;
+                string id_2;
+        public:
+                logical_and_node(string left, string right);
                 void print();
                 float evaluate();
 };
